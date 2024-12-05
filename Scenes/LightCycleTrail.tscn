@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj3g8tfas3mci"]
+
+[sub_resource type="Curve3D" id="Curve3D_ppmqk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ti0dv"]
+albedo_color = Color(0.954192, 0.000744101, 0.954186, 1)
+
+[node name="LightCycleTrail" type="Node3D"]
+
+[node name="TrailPath" type="Path3D" parent="."]
+curve = SubResource("Curve3D_ppmqk")
+
+[node name="TrailMesh" type="CSGPolygon3D" parent="."]
+polygon = PackedVector2Array(-0.1, -0.4, -0.1, 0.4, 0.1, 0.4, 0.1, -0.4)
+mode = 2
+path_node = NodePath("../TrailPath")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("StandardMaterial3D_ti0dv")

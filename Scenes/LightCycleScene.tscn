@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcvbx8ke04n3b"]
+
+[ext_resource type="PackedScene" uid="uid://dmd31ug5s2vgo" path="res://Scenes/LightCycle.tscn" id="1_3b5yv"]
+[ext_resource type="PackedScene" uid="uid://bj3g8tfas3mci" path="res://Scenes/LightCycleTrail.tscn" id="2_urxli"]
+[ext_resource type="Script" path="res://Scripts/LightCycleTrail.gd" id="3_ggoj7"]
+
+[node name="LightCycleScene" type="Node3D"]
+
+[node name="LightCycle" parent="." instance=ExtResource("1_3b5yv")]
+
+[node name="LightCycleTrail" parent="." instance=ExtResource("2_urxli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+script = ExtResource("3_ggoj7")
