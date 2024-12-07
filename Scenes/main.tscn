@@ -1,19 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://bt0sdmu5kl0da"]
+[gd_scene load_steps=6 format=3 uid="uid://bt0sdmu5kl0da"]
 
 [ext_resource type="PackedScene" uid="uid://bcvbx8ke04n3b" path="res://Scenes/LightCycleScene.tscn" id="1_efkne"]
-[ext_resource type="Shader" path="res://Shaders/floor.gdshader" id="2_bgulo"]
+[ext_resource type="Material" uid="uid://jmqg7fvfm40a" path="res://Materials/floor.tres" id="2_thesr"]
 
 [sub_resource type="Environment" id="Environment_jl37f"]
 glow_enabled = true
 glow_intensity = 2.0
 glow_strength = 1.2
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g18ly"]
-render_priority = 0
-shader = ExtResource("2_bgulo")
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_31kjp"]
-material = SubResource("ShaderMaterial_g18ly")
+material = ExtResource("2_thesr")
 size = Vector2(1000, 1000)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rkgdr"]
@@ -25,10 +21,14 @@ data = PackedVector3Array(500, 0, 500, -500, 0, 500, 500, 0, -500, -500, 0, 500,
 environment = SubResource("Environment_jl37f")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 33.0278, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 333.669, 0)
+light_color = Color(0, 0.766758, 0.90271, 1)
+light_energy = 2.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 4.0
 
-[node name="xBike" parent="." instance=ExtResource("1_efkne")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.668823, 0)
+[node name="Player" parent="." instance=ExtResource("1_efkne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.669, 0)
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_31kjp")
@@ -37,3 +37,5 @@ mesh = SubResource("PlaneMesh_31kjp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_rkgdr")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://crpjddxtudeng"]
+
+[ext_resource type="PackedScene" uid="uid://cspe0krt5l5pq" path="res://Models/lightcycle-test.glb" id="1_0v0y4"]
+[ext_resource type="Script" path="res://Scripts/LightCycleModel.gd" id="2_t0x5o"]
+
+[node name="LightCycleModel" instance=ExtResource("1_0v0y4")]
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0, 0, 0)
+script = ExtResource("2_t0x5o")
+
+[node name="Light" parent="." index="0"]
+transform = Transform3D(-0.30097, 0.714732, -0.631328, 0.0454881, -0.65051, -0.758134, -0.952548, -0.256894, 0.163272, 6.59647, 5.90386, -1.00545)
