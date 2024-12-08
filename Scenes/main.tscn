@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bt0sdmu5kl0da"]
+[gd_scene load_steps=7 format=3 uid="uid://bt0sdmu5kl0da"]
 
-[ext_resource type="PackedScene" uid="uid://bcvbx8ke04n3b" path="res://Scenes/LightCycleScene.tscn" id="1_efkne"]
+[ext_resource type="PackedScene" uid="uid://bcvbx8ke04n3b" path="res://Scenes/LightCycleScenePlayer.tscn" id="1_efkne"]
+[ext_resource type="PackedScene" uid="uid://b4v44wio4k8bo" path="res://Scenes/LightCycleSceneBot.tscn" id="2_0wjhb"]
 [ext_resource type="Material" uid="uid://jmqg7fvfm40a" path="res://Materials/floor.tres" id="2_thesr"]
 
 [sub_resource type="Environment" id="Environment_jl37f"]
@@ -27,8 +28,11 @@ light_energy = 2.0
 light_indirect_energy = 2.0
 light_volumetric_fog_energy = 4.0
 
-[node name="Player" parent="." instance=ExtResource("1_efkne")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.669, 0)
+[node name="LightCycleScenePlayer" parent="." instance=ExtResource("1_efkne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="LightCycleSceneBot" parent="." instance=ExtResource("2_0wjhb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.5, 0)
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_31kjp")
@@ -37,5 +41,3 @@ mesh = SubResource("PlaneMesh_31kjp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_rkgdr")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="."]

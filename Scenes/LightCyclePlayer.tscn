@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmd31ug5s2vgo"]
+
+[ext_resource type="Script" path="res://Scripts/LightCyclePlayer.gd" id="1_sldun"]
+[ext_resource type="PackedScene" uid="uid://crpjddxtudeng" path="res://Scenes/LightCycleModel.tscn" id="2_r2gxy"]
+[ext_resource type="AudioStream" uid="uid://cw85t0t54s3t2" path="res://Audio/engine.ogg" id="3_5egcc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_00eag"]
+
+[node name="LightCyclePlayer" type="Node3D"]
+script = ExtResource("1_sldun")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 5, 10)
+light_color = Color(0.145098, 1, 1, 1)
+light_energy = 5.0
+light_indirect_energy = 3.0
+light_volumetric_fog_energy = 3.0
+light_specular = 2.0
+spot_range = 20.0
+spot_angle = 15.0
+
+[node name="LightCycleModel" parent="." instance=ExtResource("2_r2gxy")]
+
+[node name="CameraForwards" type="Camera3D" parent="."]
+transform = Transform3D(-1, 1.51808e-08, -8.60946e-08, 0, 0.984808, 0.173648, 8.74228e-08, 0.173648, -0.984808, 0, 4, -4.5)
+fov = 100.0
+
+[node name="CameraBackwards" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 4, 5.05612)
+fov = 100.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_5egcc")
+
+[node name="LightCycleCollider" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.50893)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LightCycleCollider"]
+shape = SubResource("BoxShape3D_00eag")

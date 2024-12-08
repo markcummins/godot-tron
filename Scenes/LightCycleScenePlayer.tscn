@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcvbx8ke04n3b"]
+
+[ext_resource type="PackedScene" uid="uid://dmd31ug5s2vgo" path="res://Scenes/LightCyclePlayer.tscn" id="1_3b5yv"]
+[ext_resource type="PackedScene" uid="uid://bj3g8tfas3mci" path="res://Scenes/LightCycleTrail.tscn" id="2_urxli"]
+
+[node name="LightCycleScenePlayer" type="Node3D"]
+
+[node name="LightCyclePlayer" parent="." instance=ExtResource("1_3b5yv")]
+
+[node name="LightCycleTrail" parent="." instance=ExtResource("2_urxli")]
