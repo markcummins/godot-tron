@@ -9,3 +9,4 @@ shader_parameter/tile_color = Vector3(0, 0.1, 0.15)
 shader_parameter/grid_color = Vector3(0, 0.7, 1)
 shader_parameter/grid_thickness = 0.015
 shader_parameter/tile_size = 0.15
+shader_parameter/emission_intensity = 0.25

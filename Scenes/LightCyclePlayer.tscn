@@ -21,8 +21,13 @@ spot_angle = 15.0
 
 [node name="LightCycleModel" parent="." instance=ExtResource("2_r2gxy")]
 
-[node name="CameraForwards" type="Camera3D" parent="."]
-transform = Transform3D(-1, 1.51808e-08, -8.60946e-08, 0, 0.984808, 0.173648, 8.74228e-08, 0.173648, -0.984808, 0, 4, -4.5)
+[node name="CameraController" type="Node3D" parent="."]
+top_level = true
+
+[node name="CameraTarget" type="Node3D" parent="CameraController"]
+transform = Transform3D(-1, 8.74228e-08, 0, 8.21505e-08, 0.939693, 0.34202, 2.99004e-08, 0.34202, -0.939693, 1.7931, 3.22955, -7.05173)
+
+[node name="CameraForwards" type="Camera3D" parent="CameraController/CameraTarget"]
 fov = 100.0
 
 [node name="CameraBackwards" type="Camera3D" parent="."]
@@ -38,3 +43,5 @@ collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LightCycleCollider"]
 shape = SubResource("BoxShape3D_00eag")
+
+[connection signal="area_entered" from="LightCycleCollider" to="." method="_on_light_cycle_collider_area_entered"]

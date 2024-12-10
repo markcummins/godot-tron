@@ -1,13 +1,24 @@
-[gd_scene load_steps=7 format=3 uid="uid://bt0sdmu5kl0da"]
+[gd_scene load_steps=11 format=3 uid="uid://bt0sdmu5kl0da"]
 
 [ext_resource type="PackedScene" uid="uid://bcvbx8ke04n3b" path="res://Scenes/LightCycleScenePlayer.tscn" id="1_efkne"]
+[ext_resource type="PackedScene" uid="uid://bx7lro2cy3saf" path="res://Scenes/GameStart.tscn" id="1_nvk75"]
 [ext_resource type="PackedScene" uid="uid://b4v44wio4k8bo" path="res://Scenes/LightCycleSceneBot.tscn" id="2_0wjhb"]
 [ext_resource type="Material" uid="uid://jmqg7fvfm40a" path="res://Materials/floor.tres" id="2_thesr"]
+[ext_resource type="PackedScene" uid="uid://o3wxu1jes2xv" path="res://Scenes/Interface.tscn" id="3_yo5sf"]
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="6_vbhkn"]
+
+[sub_resource type="Sky" id="Sky_fe324"]
 
 [sub_resource type="Environment" id="Environment_jl37f"]
+background_mode = 2
+background_energy_multiplier = 3.0
+sky = SubResource("Sky_fe324")
+ambient_light_color = Color(8.66354e-07, 0.484575, 0.648657, 1)
+ambient_light_energy = 2.0
 glow_enabled = true
-glow_intensity = 2.0
-glow_strength = 1.2
+fog_enabled = true
+fog_light_color = Color(0, 0.226878, 0.260686, 1)
+fog_aerial_perspective = 0.1
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_31kjp"]
 material = ExtResource("2_thesr")
@@ -18,26 +29,40 @@ data = PackedVector3Array(500, 0, 500, -500, 0, 500, 500, 0, -500, -500, 0, 500,
 
 [node name="Main" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="Game" type="Node3D" parent="."]
+
+[node name="Interface" parent="Game" instance=ExtResource("3_yo5sf")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Game"]
 environment = SubResource("Environment_jl37f")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Game"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 333.669, 0)
 light_color = Color(0, 0.766758, 0.90271, 1)
 light_energy = 2.0
 light_indirect_energy = 2.0
 light_volumetric_fog_energy = 4.0
 
-[node name="LightCycleScenePlayer" parent="." instance=ExtResource("1_efkne")]
+[node name="LightCycleScenePlayer" parent="Game" instance=ExtResource("1_efkne")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="LightCycleSceneBot" parent="." instance=ExtResource("2_0wjhb")]
+[node name="LightCycleSceneBot" parent="Game" instance=ExtResource("2_0wjhb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.5, 0)
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Floor" type="MeshInstance3D" parent="Game"]
 mesh = SubResource("PlaneMesh_31kjp")
+skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Game/Floor"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Game/Floor/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_rkgdr")
+
+[node name="GameStart" type="Node3D" parent="."]
+
+[node name="GameStartScreen" parent="GameStart" instance=ExtResource("1_nvk75")]
+
+[node name="Managers" type="Node" parent="."]
+
+[node name="GameManager" type="Node" parent="Managers"]
+script = ExtResource("6_vbhkn")

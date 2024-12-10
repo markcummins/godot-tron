@@ -2,7 +2,7 @@ extends LightCycleBase
 
 class_name LightCyclePlayer
 
-@onready var camera_forwards: Camera3D = $CameraForwards
+@onready var camera_forwards: Camera3D = $CameraController/CameraTarget/CameraForwards
 @onready var camera_backwards: Camera3D = $CameraBackwards
 
 func _ready():
@@ -32,7 +32,17 @@ func _process(delta: float) -> void:
 		turn_right(delta)
 
 	process_extend(delta)
+	camera_position_update()
 	
+func camera_position_update():
+	$CameraController.position = lerp($CameraController.position, position, 0.25)
+	
+	var target_basis = global_transform.basis
+	var current_rotation_quat = Quaternion($CameraController.global_transform.basis)
+	var target_rotation_quat = Quaternion(target_basis)
+	
+	$CameraController.global_transform.basis = target_basis
+
 func camera_back():
 	camera_forwards.current = false
 	camera_backwards.current = true
@@ -40,3 +50,9 @@ func camera_back():
 func camera_forward():
 	camera_forwards.current = true
 	camera_backwards.current = false
+
+signal on_player_died
+
+func _on_light_cycle_collider_area_entered(area: Area3D) -> void:
+	if(area.name  == "LightCycleTrailCollider"):
+		on_player_died.emit()

@@ -1,12 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bj3g8tfas3mci"]
+[gd_scene load_steps=4 format=3 uid="uid://bj3g8tfas3mci"]
 
 [ext_resource type="Script" path="res://Scripts/LightCycleTrail.gd" id="1_pp276"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmaoo"]
-albedo_color = Color(0.876353, 0.000282816, 0.794985, 1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_t34py"]
-material = SubResource("StandardMaterial3D_lmaoo")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6h5ha"]
 
@@ -14,12 +10,9 @@ material = SubResource("StandardMaterial3D_lmaoo")
 script = ExtResource("1_pp276")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("BoxMesh_t34py")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="LightCycleTrailCollider" type="Area3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LightCycleTrailCollider"]
 shape = SubResource("BoxShape3D_6h5ha")
-
-[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

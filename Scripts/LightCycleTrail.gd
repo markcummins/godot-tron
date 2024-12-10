@@ -13,18 +13,12 @@ var st: SurfaceTool = SurfaceTool.new()
 var colliding_bodies: Array = []
 
 @onready var light_trail: MeshInstance3D = $MeshInstance3D
-@onready var trail_collision: Area3D = $Area3D
+@onready var trail_collision: Area3D = $LightCycleTrailCollider
 
 func _ready():
 	var lt_material = load("res://Materials/LightTrall.tres")
 	if lt_material:
 		light_trail.material_override = lt_material
-
-func _on_area_3d_area_entered(area: Area3D) -> void:
-	if(area.name  == "LightCycleCollider"):
-		#var lightCycle = area.get_parent() as LightCycle
-		#lightCycle.kaboom()
-		print('@todo')
 
 func update_trail(bike_position: Vector3) -> void:
 	frame_counter += 1
@@ -57,7 +51,7 @@ func turn(bike_position: Vector3) -> void:
 	draw_trail()
 
 func draw_trail():
-	#draw_trail_path()
+	draw_trail_path()
 	draw_trail_collision_path()
 	
 var last_collision_index: int = 0
