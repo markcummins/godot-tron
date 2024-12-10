@@ -9,6 +9,8 @@ class_name GameManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#Engine.time_scale = 0.05
+	
 	game_start_screen.visible = false
 
 	light_cycle_scene_player.on_player_died.connect(player_died)

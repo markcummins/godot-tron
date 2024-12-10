@@ -1,16 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bj3g8tfas3mci"]
+[gd_scene load_steps=3 format=3 uid="uid://bj3g8tfas3mci"]
 
 [ext_resource type="Script" path="res://Scripts/LightCycleTrail.gd" id="1_pp276"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_t34py"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6h5ha"]
 
 [node name="LightCycleTrail" type="Node3D"]
 script = ExtResource("1_pp276")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_t34py")
+[node name="LightCycleTrailElements" type="Node3D" parent="."]
 
 [node name="LightCycleTrailCollider" type="Area3D" parent="."]
 

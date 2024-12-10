@@ -2,6 +2,8 @@ extends LightCycleBase
 
 class_name LightCyclePlayer
 
+signal on_player_died
+
 @onready var camera_forwards: Camera3D = $CameraController/CameraTarget/CameraForwards
 @onready var camera_backwards: Camera3D = $CameraBackwards
 
@@ -51,8 +53,6 @@ func camera_forward():
 	camera_forwards.current = true
 	camera_backwards.current = false
 
-signal on_player_died
-
-func _on_light_cycle_collider_area_entered(area: Area3D) -> void:
-	if(area.name  == "LightCycleTrailCollider"):
+func _on_light_cycle_collider_body_entered(body: Node3D) -> void:
+	if body.get_parent() and body.get_parent().name == "LightCycleTrailCollider":
 		on_player_died.emit()
