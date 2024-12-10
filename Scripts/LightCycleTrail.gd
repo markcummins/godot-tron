@@ -3,7 +3,9 @@ extends Node3D
 var frame_counter: int = 0
 @export var update_frequency: int = 5
 
-var trail_points: Array = []
+var current_pos_start: Vector3
+var current_pos_end: Vector3
+
 @export var maximum_trail_points: int = 100
 
 @export var trail_width: float = 0.1
@@ -21,41 +23,26 @@ func update_trail(bike_position: Vector3) -> void:
 	
 	var flat_position = Vector3(bike_position.x, 0, bike_position.z)
 
-	if trail_points.size() <= 1:
-		trail_points.append(flat_position)
-		return
-
-	trail_points.append(flat_position)
-	draw_trail()
-
-func turn(bike_position: Vector3) -> void:
-	var flat_position = Vector3(bike_position.x, 0, bike_position.z)
+	current_pos_start = current_pos_end
+	current_pos_end = flat_position
 	
-	trail_points.append(flat_position)
-	draw_trail()
+	if(current_pos_end != Vector3.ZERO):
+		draw_trail()
 
 func draw_trail():
 	draw_trail_path()
 	draw_trail_collision_path()
 
 func draw_trail_collision_path():
-   # Ensure there are enough points to form a segment
-	if trail_points.size() < 2:
-		return
-
-	# Get the last two points
-	var current_point = trail_points[trail_points.size() - 2]
-	var next_point = trail_points[trail_points.size() - 1]
-	
 	 # Calculate midpoint and orientation
-	var midpoint = (current_point + next_point) / 2
-	var direction = (next_point - current_point).normalized()
+	var midpoint = (current_pos_start + current_pos_end) / 2
+	var direction = (current_pos_end - current_pos_start).normalized()
 	var basis = Basis().looking_at(direction, Vector3.UP)
 	var shape_transform = Transform3D(basis, midpoint)
 
 	# Create and configure the collision shape
 	var box_shape = BoxShape3D.new()
-	box_shape.size = Vector3(trail_width * 2, trail_height, (next_point - current_point).length())
+	box_shape.size = Vector3(trail_width * 2, trail_height, (current_pos_end - current_pos_start).length())
 
 	# Create a new StaticBody3D for this segment
 	var collision_segment = StaticBody3D.new()
@@ -72,20 +59,12 @@ func draw_trail_collision_path():
 		trail_collision.get_child(0).queue_free()
 
 func draw_trail_path():
-	# Ensure we have enough points to form a segment
-	if trail_points.size() < 2:
-		return
-
-	# Get the last two points
-	var current_point = trail_points[trail_points.size() - 2]
-	var next_point = trail_points[trail_points.size() - 1]
-
 	# Direction vector between points & Perpendicular vector for trail width
-	var direction = (next_point - current_point).normalized()
+	var direction = (current_pos_end - current_pos_start).normalized()
 	var perpendicular = Vector3(-direction.z, 0, direction.x) * trail_width
 
 	# Commit the mesh
-	var st = generate_mesh(current_point, next_point, perpendicular)
+	var st = generate_mesh(current_pos_start, current_pos_end, perpendicular)
 	var trail_mesh = st.commit()
 
 	# Create a new MeshInstance3D
@@ -118,7 +97,6 @@ func generate_mesh(current_point, next_point, perpendicular):
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
-	# Add the vertices for one segment
 	# Top face
 	st.add_vertex(top_left_start)
 	st.add_vertex(top_right_start)
