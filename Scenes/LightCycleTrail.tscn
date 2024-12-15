@@ -10,6 +10,8 @@ script = ExtResource("1_pp276")
 [node name="LightCycleTrailElements" type="Node3D" parent="."]
 
 [node name="LightCycleTrailCollider" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LightCycleTrailCollider"]
 shape = SubResource("BoxShape3D_6h5ha")

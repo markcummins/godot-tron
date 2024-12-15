@@ -3,6 +3,7 @@ extends Node3D
 var frame_counter: int = 0
 @export var update_frequency: int = 5
 
+
 var current_pos_start: Vector3
 var current_pos_end: Vector3
 
@@ -14,15 +15,19 @@ var current_pos_end: Vector3
 @onready var trail_elements: Node3D = $LightCycleTrailElements
 @onready var trail_collision: Area3D = $LightCycleTrailCollider
 
-func update_trail(bike_position: Vector3) -> void:
+@onready var lightcycle_bot: LightCycleBot = $"../LightCycleBot"
+@onready var lightcycle_model: Node3D = $"../LightCycleBot/LightCycleModel"
+
+func update_trail(lightcycle_position: Vector3) -> void:
 	frame_counter += 1
 	if frame_counter % update_frequency != 0:
 		return
 
 	frame_counter = 0 
 	
-	var flat_position = Vector3(bike_position.x, 0, bike_position.z)
-
+	var flat_position = Vector3(lightcycle_position.x, lightcycle_position.y, lightcycle_position.z)
+	
+ 	# Adjust the points to include the vertical position of the lightcycle_bot
 	current_pos_start = current_pos_end
 	current_pos_end = flat_position
 	
