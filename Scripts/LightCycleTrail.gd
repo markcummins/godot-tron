@@ -3,21 +3,27 @@ extends Node3D
 var frame_counter: int = 0
 @export var update_frequency: int = 5
 
-
 var current_pos_start: Vector3
 var current_pos_end: Vector3
 
-@export var maximum_trail_points: int = 100
+@export var maximum_trail_points: int = 1000
 
 @export var trail_width: float = 0.1
 @export var trail_height: float = 0.5
 
+@onready var trail_material = StandardMaterial3D.new()
+
 @onready var trail_elements: Node3D = $LightCycleTrailElements
 @onready var trail_collision: Area3D = $LightCycleTrailCollider
 
+@onready var lightcycle_scene: Node3D = $"../"
 @onready var lightcycle_bot: LightCycleBot = $"../LightCycleBot"
 @onready var lightcycle_model: Node3D = $"../LightCycleBot/LightCycleModel"
 
+
+func _ready():
+	trail_material = lightcycle_scene.trailMaterial;
+	
 func update_trail(lightcycle_position: Vector3) -> void:
 	frame_counter += 1
 	if frame_counter % update_frequency != 0:
@@ -76,6 +82,7 @@ func draw_trail_path():
 	var segment_instance = MeshInstance3D.new()
 	segment_instance.mesh = trail_mesh
 	segment_instance.name = "TrailSegment"
+	segment_instance.set_surface_override_material(0, trail_material)
 
 	 #Add the segment to the scene
 	trail_elements.add_child(segment_instance)

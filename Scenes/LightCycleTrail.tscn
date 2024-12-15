@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bj3g8tfas3mci"]
+[gd_scene load_steps=2 format=3 uid="uid://bj3g8tfas3mci"]
 
 [ext_resource type="Script" path="res://Scripts/LightCycleTrail.gd" id="1_pp276"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_6h5ha"]
 
 [node name="LightCycleTrail" type="Node3D"]
 script = ExtResource("1_pp276")
@@ -12,6 +10,3 @@ script = ExtResource("1_pp276")
 [node name="LightCycleTrailCollider" type="Area3D" parent="."]
 collision_layer = 2
 collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LightCycleTrailCollider"]
-shape = SubResource("BoxShape3D_6h5ha")

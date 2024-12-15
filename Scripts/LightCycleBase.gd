@@ -6,7 +6,7 @@ class_name LightCycleBase
 @export var min_speed: float = 60.0
 @export var friction: float = 2.0
 @export var acceleration: float = 0.5
-@export var turn_speed: float = 4
+@export var turn_speed: float = 8
 
 @onready var light_cycle_scene: Node3D = $".."
 
@@ -115,7 +115,8 @@ func lc_rotate(delta):
 	rotation.y += turn_direction * turn_speed * delta
 
 	# Check if the turn is complete
-	if abs(angle_difference) < deg_to_rad(2):
+	var snap_radius = clamp(2, 45, turn_speed)
+	if abs(angle_difference) < deg_to_rad(snap_radius):
 		rotation.y = rotation_to
 		is_turning = false
 

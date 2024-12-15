@@ -1,11 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://bt0sdmu5kl0da"]
+[gd_scene load_steps=13 format=3 uid="uid://bt0sdmu5kl0da"]
 
 [ext_resource type="PackedScene" uid="uid://bx7lro2cy3saf" path="res://Scenes/GameStart.tscn" id="1_nvk75"]
 [ext_resource type="PackedScene" uid="uid://b4v44wio4k8bo" path="res://Scenes/LightCycleSceneBot.tscn" id="2_0wjhb"]
 [ext_resource type="PackedScene" uid="uid://bcvbx8ke04n3b" path="res://Scenes/LightCycleScenePlayer.tscn" id="3_xx08i"]
 [ext_resource type="PackedScene" uid="uid://o3wxu1jes2xv" path="res://Scenes/Interface.tscn" id="3_yo5sf"]
+[ext_resource type="Material" uid="uid://bffu1vhgbwd0x" path="res://Materials/LightTrailPlayer.tres" id="4_8c2dq"]
 [ext_resource type="PackedScene" uid="uid://c1jpl7f4ioirb" path="res://Scenes/Map.tscn" id="4_35hls"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="6_vbhkn"]
+[ext_resource type="Material" uid="uid://c1i1l34uy2wvo" path="res://Materials/LightTrailBot.tres" id="6_vveko"]
+[ext_resource type="Material" uid="uid://bpr5e1bak42wp" path="res://Materials/LightTrailBotB.tres" id="7_eo70w"]
+[ext_resource type="Material" uid="uid://cuy3424lg4icy" path="res://Materials/LightTrailBotC.tres" id="8_k801c"]
 
 [sub_resource type="Sky" id="Sky_lm20o"]
 
@@ -40,36 +44,55 @@ light_volumetric_fog_energy = 4.0
 
 [node name="LightCycleScenePlayer" parent="Game" instance=ExtResource("3_xx08i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+trailMaterial = ExtResource("4_8c2dq")
 
 [node name="LightCycleSceneBotA" parent="Game" instance=ExtResource("2_0wjhb")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 234.086, 0.5, 370.84)
+trailMaterial = ExtResource("6_vveko")
 
 [node name="LightCycleSceneBotA2" parent="Game" instance=ExtResource("2_0wjhb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -98.6217, 0.5, -442.635)
+trailMaterial = ExtResource("6_vveko")
 
 [node name="LightCycleSceneBotA3" parent="Game" instance=ExtResource("2_0wjhb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -164.232, 0.5, 370.84)
+trailMaterial = ExtResource("6_vveko")
 
 [node name="LightCycleSceneBotA4" parent="Game" instance=ExtResource("2_0wjhb")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 255.26, 0.5, -387.362)
+trailMaterial = ExtResource("7_eo70w")
 
 [node name="LightCycleSceneBotA5" parent="Game" instance=ExtResource("2_0wjhb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -330.24, 0.5, 370.84)
+trailMaterial = ExtResource("7_eo70w")
 
 [node name="LightCycleSceneBotA6" parent="Game" instance=ExtResource("2_0wjhb")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 388.416, 0.5, 227.887)
+trailMaterial = ExtResource("7_eo70w")
 
 [node name="LightCycleSceneBotA7" parent="Game" instance=ExtResource("2_0wjhb")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 386, 0.5, -8.15961)
+trailMaterial = ExtResource("8_k801c")
 
 [node name="LightCycleSceneBotA8" parent="Game" instance=ExtResource("2_0wjhb")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -331, 0.5, -214.16)
+trailMaterial = ExtResource("8_k801c")
 
 [node name="LightCycleSceneBotA9" parent="Game" instance=ExtResource("2_0wjhb")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -420.111, 0.5, -399.718)
+trailMaterial = ExtResource("8_k801c")
 
 [node name="LightCycleSceneBotA10" parent="Game" instance=ExtResource("2_0wjhb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52, 0.5, 370.84)
+trailMaterial = ExtResource("6_vveko")
+
+[node name="LightCycleSceneBotA11" parent="Game" instance=ExtResource("2_0wjhb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52, 0.5, 370.84)
+trailMaterial = ExtResource("6_vveko")
+
+[node name="LightCycleSceneBotA12" parent="Game" instance=ExtResource("2_0wjhb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52, 0.5, 370.84)
+trailMaterial = ExtResource("6_vveko")
 
 [node name="GameStart" type="Node3D" parent="."]
 
